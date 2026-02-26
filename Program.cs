@@ -11,7 +11,7 @@ ContactService service = new ContactService(storage);
 
 while (true)
 {
-    Console.WriteLine("Contacts List: \n");
+    Console.WriteLine("\nContacts List: \n");
     var list = service.GetContacts();
     foreach (var contact in list)
     {
@@ -118,15 +118,18 @@ while (true)
 
         if (contactSearch != null)
         {
-            var results = service.Search(contactSearch, search);
+            var result = service.Search(contactSearch, search);
             Console.WriteLine("\nSearch Result: \n");
-            foreach (var contact in results)
-            {
-                Console.WriteLine(contact);
-            }
-            if (results.Count == 0)
+            
+            
+            if (result == null)
             {
                 Console.WriteLine("No Results!");
+            }
+            else
+            {
+                Console.WriteLine(result);
+
             }
         }
     }

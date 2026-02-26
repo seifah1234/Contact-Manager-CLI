@@ -10,10 +10,10 @@ namespace Contact_Manager_CLI.Search
 {
     public class SearchByEmail : IContactSearch
     {
-        public List<Contact> Search(List<Contact> contacts, string email)
+        public Contact? Search(List<Contact> contacts, string email)
         {
             return contacts
-                .Where(c => c.Email.ToLower() == email.ToLower()).ToList();
+                .FirstOrDefault(c => c.Email.ToLower() == email.ToLower());
         }
     }
 }

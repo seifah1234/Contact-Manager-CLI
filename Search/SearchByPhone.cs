@@ -10,10 +10,10 @@ namespace Contact_Manager_CLI.Search
 {
     public class SearchByPhone : IContactSearch
     {
-        public List<Contact> Search(List<Contact> contacts, string phone)
+        public Contact? Search(List<Contact> contacts, string phone)
         {
             return contacts
-                .Where(c => c.Phone == phone).ToList();
+                .FirstOrDefault(c => c.Phone == phone);
         }
     }
 }

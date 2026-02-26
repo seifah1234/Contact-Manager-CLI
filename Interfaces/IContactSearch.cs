@@ -9,6 +9,6 @@ namespace Contact_Manager_CLI.Interfaces
 {
     public interface IContactSearch
     {
-        public List<Contact> Search(List<Contact> contacts, string search);
+        public Contact? Search(List<Contact> contacts, string search);
     }
 }

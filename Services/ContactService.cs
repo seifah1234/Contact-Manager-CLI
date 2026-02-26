@@ -58,7 +58,7 @@ namespace Contact_Manager_CLI.Services
         }
 
       
-        public List<Contact> Search(IContactSearch search, string keyword)
+        public Contact? Search(IContactSearch search, string keyword)
         {
             return search.Search(_contacts, keyword);
         }
