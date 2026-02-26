@@ -1,4 +1,5 @@
-﻿using Contact_Manager_CLI.Interfaces;
+﻿using Contact_Manager_CLI.Filter;
+using Contact_Manager_CLI.Interfaces;
 using Contact_Manager_CLI.Models;
 using Contact_Manager_CLI.Search;
 using Contact_Manager_CLI.Services;
@@ -18,7 +19,7 @@ while (true)
     }
     if (list.Count == 0)
     {
-        Console.WriteLine("No Contacts Found!");
+        Console.WriteLine("No Contacts Found To Display!");
     }
     Console.WriteLine("\n\nMain Menu:");
     Console.WriteLine(" 1- Add Contact");
@@ -96,17 +97,18 @@ while (true)
     else if (choice == "6")
     {
 
-        Console.WriteLine("Enter search keyword:");
-        string keyword = Console.ReadLine();
-
         Console.WriteLine("Search by:");
         Console.WriteLine("1 - Name");
         Console.WriteLine("2 - Email");
         Console.WriteLine("3 - Phone");
 
+        Console.WriteLine("\nEnter your choice: ");
         choice = Console.ReadLine();
+        Console.WriteLine("Enter search word:");
+        string search = Console.ReadLine();
 
-        IContactSearch strategy = choice switch
+
+        IContactSearch contactSearch = choice switch
         {
             "1" => new SearchByName(),
             "2" => new SearchByEmail(),
@@ -114,13 +116,55 @@ while (true)
             _ => null
         };
 
-        if (strategy != null)
+        if (contactSearch != null)
         {
-            var results = service.Search(strategy, keyword);
-
+            var results = service.Search(contactSearch, search);
+            Console.WriteLine("\nSearch Result: \n");
             foreach (var contact in results)
             {
-                Console.WriteLine(contact.ToString());
+                Console.WriteLine(contact);
+            }
+            if (results.Count == 0)
+            {
+                Console.WriteLine("No Results!");
+            }
+        }
+    }
+    else if (choice == "7")
+    {
+
+        Console.WriteLine("Filter by:");
+        Console.WriteLine("1 - Name");
+        Console.WriteLine("2 - Email");
+        Console.WriteLine("3 - Phone");
+
+        Console.WriteLine("\nEnter your choice: ");
+        choice = Console.ReadLine();
+
+        Console.WriteLine("Enter your filter:");
+        string filter = Console.ReadLine();
+
+
+        IContactFilter contactFilter = choice switch
+        {
+            "1" => new FilterByName(),
+            "2" => new FilterByEmail(),
+            "3" => new FilterByPhone(),
+            _ => null
+        };
+
+        if (contactFilter != null)
+        { 
+            var results = service.Filter(contactFilter, filter);
+            Console.WriteLine("\nFilter Result: \n");
+            foreach (var contact in results)
+            {
+                Console.WriteLine(contact);
+            }
+
+            if (results.Count == 0)
+            {
+                Console.WriteLine("No Results!");
             }
         }
     }

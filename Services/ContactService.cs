@@ -62,6 +62,11 @@ namespace Contact_Manager_CLI.Services
         {
             return search.Search(_contacts, keyword);
         }
+      
+        public List<Contact> Filter(IContactFilter search, string keyword)
+        {
+            return search.Filter(_contacts, keyword);
+        }
 
         public void Save()
         {

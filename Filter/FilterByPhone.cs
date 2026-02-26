@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contact_Manager_CLI.Search
+namespace Contact_Manager_CLI.Filter
 {
-    public class SearchByPhone : IContactSearch
+    public class FilterByPhone : IContactFilter
     {
-        public List<Contact> Search(List<Contact> contacts, string phone)
+        public List<Contact> Filter(List<Contact> contacts, string keyword)
         {
             return contacts
-                .Where(c => c.Phone == phone).ToList();
+                .Where(c => c.Phone.Contains(keyword)).ToList();
         }
     }
 }

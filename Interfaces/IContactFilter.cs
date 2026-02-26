@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Contact_Manager_CLI.Interfaces
 {
-    public interface IContactSearch
+    public interface IContactFilter
     {
-        public List<Contact> Search(List<Contact> contacts, string search);
+        public List<Contact> Filter(List<Contact> contacts, string filter);
     }
 }
